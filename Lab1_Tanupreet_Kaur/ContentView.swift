@@ -30,8 +30,13 @@ struct ContentView: View {
     //Timer
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-
     var body: some View {
+        ZStack{
+            
+            LinearGradient(
+                colors: [Color(.systemIndigo).opacity(0.9)], startPoint: .topLeading, endPoint: .bottomTrailing
+            ).ignoresSafeArea()
+        }
     }
 }
 
