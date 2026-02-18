@@ -49,11 +49,28 @@ struct ContentView: View {
     // UI Parts
     private var header: some View {
         HStack {
-            VStack(){
+            VStack(alignment: .leading, spacing: 6){
                 Text("Prime Number Game")
                     .font(.system(size: 26, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
+                
+                Text("Decide before the timer runs out!")
+                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.85))
             }
+            
+            //Timer
+            HStack{
+                Image(systemName: "timer")
+                Text("\(secondsLeft)s")
+                    .monospacedDigit()
+                    .font(.system(size: 16, weight: .bold, design: .rounded))
+            }
+            .foregroundStyle(.white)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 12)
+            .background(.white.opacity(0.16))
+            .clipShape(Capsule())
         }
     }
 }
