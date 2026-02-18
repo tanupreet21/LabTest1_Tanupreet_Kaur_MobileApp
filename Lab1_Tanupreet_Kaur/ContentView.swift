@@ -38,8 +38,9 @@ struct ContentView: View {
                 colors: [Color(.systemIndigo).opacity(0.9)], startPoint: .topLeading, endPoint: .bottomTrailing
             ).ignoresSafeArea()
             
-            VStack{
+            VStack(spacing:18){
                 header
+                NumberCard
             }
             
 
@@ -71,6 +72,14 @@ struct ContentView: View {
             .padding(.horizontal, 12)
             .background(.white.opacity(0.16))
             .clipShape(Capsule())
+        }
+    }
+    
+    private var NumberCard: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .fill(.ultraThinMaterial)
+                .shadow(color: .black.opacity(0.15), radius: 18, x: 0, y: 10)
         }
     }
 }
