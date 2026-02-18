@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+internal import Combine
 
 struct ContentView: View {
     
@@ -26,8 +27,10 @@ struct ContentView: View {
     
     @State private var showStatsAlert: Bool = false
     
+    //Timer
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    
+
     var body: some View {
     }
 }
