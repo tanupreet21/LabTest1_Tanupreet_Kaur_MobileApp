@@ -30,12 +30,30 @@ struct ContentView: View {
     //Timer
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
+    //Layout
     var body: some View {
         ZStack{
-            
+            //Background
             LinearGradient(
                 colors: [Color(.systemIndigo).opacity(0.9)], startPoint: .topLeading, endPoint: .bottomTrailing
             ).ignoresSafeArea()
+            
+            VStack{
+                header
+            }
+            
+
+        }
+    }
+    
+    // UI Parts
+    private var header: some View {
+        HStack {
+            VStack(){
+                Text("Prime Number Game")
+                    .font(.system(size: 26, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white)
+            }
         }
     }
 }
