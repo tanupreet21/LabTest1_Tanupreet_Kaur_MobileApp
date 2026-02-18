@@ -80,7 +80,37 @@ struct ContentView: View {
             RoundedRectangle(cornerRadius: 22, style: .continuous)
                 .fill(.ultraThinMaterial)
                 .shadow(color: .black.opacity(0.15), radius: 18, x: 0, y: 10)
+            
+            VStack(spacing: 14){
+                Text("\(currentNumber)")
+                    .font(.system(size: 70, weight: .heavy, design: .rounded))
+                    .foregroundStyle(.primary)
+                
+                Text("Prime or Not Prime?")
+                    .font(.system(size: 18, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.secondary)
+                
+                // Result area
+                Group {
+                    if let ok = resultCorrect {
+                        Image(systemName: ok ? "checkmark.circle.fill" : "xmark.circle.fill")
+                            .font(.system(size: 54, weight: .bold))
+                            .foregroundStyle(ok ? .green : .red)
+                            .transition(.scale.combined(with: .opacity))
+                    } else {
+                        // Placeholder to keep layout stable
+                        Image(systemName: "circle")
+                            .font(.system(size: 54, weight: .bold))
+                            .foregroundStyle(.clear)
+                    }
+                }
+                .animation(.spring(response: 0.35, dampingFraction: 0.7), value: resultCorrect)
+                
+            }
+            .padding(22)
         }
+        .frame(maxWidth: .infinity)
+        .frame(height: 340)
     }
 }
 
