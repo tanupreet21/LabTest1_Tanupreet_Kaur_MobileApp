@@ -9,8 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     
-    private let roundSeconds: Int = 5;
-    private let numberRange: ClosedRange<Int> = 2...200;
+    private let roundSeconds: Int = 5
+    private let numberRange: ClosedRange<Int> = 2...200
+    
+    // Game State variables
+    @State private var currentNumber: Int = Int.random(in: 2...200)
+    @State private var secondsLeft: Int = 5
+    
+    @State private var hasAnswered: Bool = false
+    // nil = no results yet, true = correct, false = wrong
+    @State private var resultCorrect: Bool? = nil
+    
+    @State private var attempts: Int = 0
+    @State private var correct: Int = 0
+    @State private var wrong: Int = 0
+    
+    @State private var showStatsAlert: Bool = false
+    
     
     
     var body: some View {
