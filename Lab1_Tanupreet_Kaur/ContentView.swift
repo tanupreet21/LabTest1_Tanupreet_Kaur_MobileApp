@@ -41,9 +41,24 @@ struct ContentView: View {
             VStack(spacing:18){
                 header
                 NumberCard
+                choiceRow
+                footer
             }
-            
-
+            .padding(.horizontal, 18)
+            .padding(.top, 10)
+        }
+        .onAppear {
+            startNewRound()
+        }
+        .onReceive(timer) { _ in
+            tick()
+        }
+        .alert("10 Attempts Summary", isPresented: $showStatsAlert) {
+            Button("Continue") {
+                
+            }
+        } message: {
+            Text("Correct: \(correct)\nWrong: \(wrong)\nTotal Attempts: \(attempts)")
         }
     }
     
