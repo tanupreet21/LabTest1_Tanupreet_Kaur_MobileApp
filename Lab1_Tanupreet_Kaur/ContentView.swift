@@ -138,13 +138,13 @@ struct ContentView: View {
     }
     
     private var choiceRow: some View {
-        HStack{
+        HStack(spacing: 14){
             choiceButton(title: "Prime", systemImage: "sparkles", tint: .green{
-                // answer(userSaysPrime: true)
+                answer(userSaysPrime: true)
             }
                          
-            choiceButton(title: "Not Prime", systemImage: "slash.circle", tint: .orange{
-                // answer(userSaysPrime: false)
+                         action: choiceButton(title: "Not Prime", systemImage: "slash.circle", tint: .orange{
+                answer(userSaysPrime: false)
             }
                          
         }
@@ -192,6 +192,51 @@ struct ContentView: View {
         if attempts % 10 == 0 {
             showStatsAlert = true
         }
+    }
+    
+    private func isPrime(_ n: Int) -> Bool {
+        if n < 2 {return false}
+        if n == 2 {return true}
+        if n % 2 == 0 { return false}
+        var i = 3
+        while i * i <= n {
+            if n % i == 0 {return false}
+            i += 2
+        }
+        return true
+    }
+    
+    private func startNewRound(){
+        currentNumber = Int.random(in: numberRange)
+        secondsLeft = roundSeconds
+        hasAnswered = false
+        resultCorrect = nil
+    }
+    
+    private func statPill(title: String, value: String) -> some View {
+        VStack(spacing: 4){
+            Text(title)
+                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .foregroundStyle(.white.opacity(0.85))
+            Text(value)
+                .font(.system(size: 18, weight: .heavy, design: .rounded))
+                .foregroundStyle(.white)
+        }
+        .padding(.vertical, 10)
+        .padding(.horizontal, 14)
+        .background(.white.opacity(0.16))
+        .clipShape(RoundedRectangle(cornerRadius: 16, style:.continuous))
+    }
+    
+    private var footer: some View {
+        HStack {
+            statPill(title: "Attempts", value: "\(attempts)")
+            Spacer()
+            statPill(title: "Correct", value: "\(correct)")
+            Spacer()
+            statPill(title: "Wrong", value: "\(wrong)")
+        }
+        .padding(.top, 6)
     }
 }
 
