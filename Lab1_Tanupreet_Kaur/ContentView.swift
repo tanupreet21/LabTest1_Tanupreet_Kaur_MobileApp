@@ -139,7 +139,14 @@ struct ContentView: View {
     
     private var choiceRow: some View {
         HStack{
-            
+            choiceButton(title: "Prime", systemImage: "sparkles", tint: .green{
+                // answer(userSaysPrime: true)
+            }
+                         
+            choiceButton(title: "Not Prime", systemImage: "slash.circle", tint: .orange{
+                // answer(userSaysPrime: false)
+            }
+                         
         }
     }
     
@@ -160,6 +167,31 @@ struct ContentView: View {
             .shadow(color: .black.opacity(0.12), radius: 12, x:0, y:8)
         }
         .disabled(hasAnswered) //disable after one tap
+    }
+    
+    private func answer(userSaysPrime: Bool){
+        guard !hasAnswered else {return}
+        hasAnswered = true
+        
+        let actualPrime = isPrime(currentNumber)
+        let isCorrect = (userSaysPrime == actualPrime)
+        record(isCorrect: isCorrect)
+    }
+    
+    private func record(isCorrect: Bool){
+        resultCorrect = isCorrect
+        
+        attempts += 1
+        if isCorrect {
+            correct += 1
+        } else {
+            wrong += 1
+        }
+        
+        // Show dialog after every 10 attempts
+        if attempts % 10 == 0 {
+            showStatsAlert = true
+        }
     }
 }
 
