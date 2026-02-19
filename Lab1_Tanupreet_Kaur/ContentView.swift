@@ -154,11 +154,11 @@ struct ContentView: View {
     
     private var choiceRow: some View {
         HStack(spacing: 14){
-            choiceButton(title: "Prime", systemImage: "sparkles", tint: .green{
+            choiceButton(title: "Prime", systemImage: "sparkles", tint: .green){
                 answer(userSaysPrime: true)
             }
                          
-                         action: choiceButton(title: "Not Prime", systemImage: "slash.circle", tint: .orange{
+            choiceButton(title: "Not Prime", systemImage: "slash.circle", tint: .orange){
                 answer(userSaysPrime: false)
             }
                          
@@ -252,6 +252,26 @@ struct ContentView: View {
             statPill(title: "Wrong", value: "\(wrong)")
         }
         .padding(.top, 6)
+    }
+    
+    private func tick(){
+        // If user already answered, we still wait for the round to end, then we show a new number
+        guard secondsLeft > 0 else {return}
+        
+        secondsLeft -= 1
+        
+        // round ended
+        if secondsLeft == 0 {
+            if !hasAnswered {
+                //Timeout = wrong answer recorded
+                record(isCorrect: false)
+            }
+            
+            // Move to next number shortly so user sees the icon
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                startNewRound()
+            }
+        }
     }
 }
 
