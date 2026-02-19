@@ -70,7 +70,7 @@ struct ContentView: View {
         HStack {
             VStack(alignment: .leading, spacing: 6){
                 Text("Prime Number Game")
-                    .font(.system(size: 26, weight: .bold, design: .rounded))
+                    .font(.system(size: 28, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                 
                 Text("Decide before the timer runs out!")
@@ -232,6 +232,7 @@ struct ContentView: View {
         resultCorrect = nil
     }
     
+    // Ui for stat dialog
     private func statPill(title: String, value: String) -> some View {
         VStack(spacing: 4){
             Text(title)
@@ -258,6 +259,7 @@ struct ContentView: View {
         .padding(.top, 6)
     }
     
+    // Main logic 
     private func tick(){
         // Pause game when user sees the stats dialog
         guard !isPaused, !showStatsAlert else {return}
