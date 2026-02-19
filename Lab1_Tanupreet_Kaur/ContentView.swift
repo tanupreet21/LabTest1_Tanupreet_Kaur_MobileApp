@@ -129,7 +129,37 @@ struct ContentView: View {
                         .animation(.linear(duration: 0.15), value: secondsLeft)
                 }
             }.frame(height: 10)
+            
+            Text(hasAnswered ? "Locked until next number.." : "Tap an answer")
+                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                .foregroundStyle(.secondary)
+            
         }
+    }
+    
+    private var choiceRow: some View {
+        HStack{
+            
+        }
+    }
+    
+    private func choiceButton(title: String, systemImage: String, tint: Color, action: @escaping () -> Void) -> some View{
+        Button(action: action){
+            HStack{
+                Image(systemName: systemImage)
+                Text(title)
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
+            }
+            .foregroundStyle(.white)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 16)
+            .background(
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .fill(tint.opacity(hasAnswered ? 0.45 : 0.9))
+            )
+            .shadow(color: .black.opacity(0.12), radius: 12, x:0, y:8)
+        }
+        .disabled(hasAnswered) //disable after one tap
     }
 }
 
