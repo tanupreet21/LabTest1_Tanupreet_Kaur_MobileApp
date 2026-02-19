@@ -56,7 +56,9 @@ struct ContentView: View {
         }
         .alert("10 Attempts Summary", isPresented: $showStatsAlert) {
             Button("Continue") {
-                
+                isPaused = false
+                // resets timer + clears icon + new number
+                startNewRound()
             }
         } message: {
             Text("Correct: \(correct)\nWrong: \(wrong)\nTotal Attempts: \(attempts)")
