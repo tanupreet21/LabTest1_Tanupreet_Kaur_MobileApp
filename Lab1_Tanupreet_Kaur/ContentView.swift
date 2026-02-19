@@ -26,6 +26,7 @@ struct ContentView: View {
     @State private var wrong: Int = 0
     
     @State private var showStatsAlert: Bool = false
+    @State private var isPaused: Bool = false
     
     //Timer
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -205,6 +206,7 @@ struct ContentView: View {
         
         // Show dialog after every 10 attempts
         if attempts % 10 == 0 {
+            isPaused = true
             showStatsAlert = true
         }
     }
@@ -255,6 +257,9 @@ struct ContentView: View {
     }
     
     private func tick(){
+        // Pause game when user sees the stats dialog
+        guard !isPaused, !showStatsAlert else {return}
+        
         // If user already answered, we still wait for the round to end, then we show a new number
         guard secondsLeft > 0 else {return}
         
