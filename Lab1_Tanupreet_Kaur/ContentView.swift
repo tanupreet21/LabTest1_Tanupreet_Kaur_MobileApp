@@ -106,11 +106,30 @@ struct ContentView: View {
                 }
                 .animation(.spring(response: 0.35, dampingFraction: 0.7), value: resultCorrect)
                 
+                //Progress bar
+                progressBar.padding(.horizontal, 8)
             }
             .padding(22)
         }
         .frame(maxWidth: .infinity)
         .frame(height: 340)
+    }
+    
+    private var progressBar: some View {
+        let progress = Double(secondsLeft)/Double(roundSeconds)
+        
+        return VStack(spacing: 8){
+            GeometryReader { geo in
+                ZStack(alignment: .leading){
+                    Capsule()
+                        .fill(Color.secondary.opacity(0.15))
+                    Capsule()
+                        .fill(secondsLeft <= 2 ? Color.red.opacity(0.85) : Color.blue.opacity(0.75))
+                        .frame(width: geo.size.width * progress)
+                        .animation(.linear(duration: 0.15), value: secondsLeft)
+                }
+            }.frame(height: 10)
+        }
     }
 }
 
