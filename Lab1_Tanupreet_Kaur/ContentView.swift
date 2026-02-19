@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-internal import Combine
+import Combine
 
 struct ContentView: View {
     
@@ -77,7 +77,7 @@ struct ContentView: View {
                     .font(.system(size: 14, weight: .semibold, design: .rounded))
                     .foregroundStyle(.white.opacity(0.85))
             }
-            
+            Spacer()
             //Timer
             HStack{
                 Image(systemName: "timer")
